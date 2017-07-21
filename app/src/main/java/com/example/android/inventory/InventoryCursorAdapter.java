@@ -169,6 +169,10 @@ public class InventoryCursorAdapter extends CursorAdapter {
                     Uri currentItemInventory = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
                     mView.getContext().getContentResolver().update(currentItemInventory,values, null, null);
 
+                    //Update the textView
+                    quantity = cursor.getInt(quantityColumnIndex);
+                    quantityTextView.setText((Integer.toString(quantity)) + " " + unit);
+
                     //Send the information about the order by email
                     Intent sendOrder = new Intent(Intent.ACTION_SENDTO);
                     sendOrder.setData(Uri.parse("mailto:")); // only email apps should handle this
