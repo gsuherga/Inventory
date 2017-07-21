@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- Name for the application -->
+    <string name="app_name">Inventory</string>
+
+    <!-- Label for overflow menu option that inserts fake data into the app -->
+    <string name="action_insert_inventory_data">Insert example item Data</string>
+
+    <!-- Label for overflow menu option that inserts fake data into the app -->
+    <string name="action_insert_new_inventory_data">Insert new item Data</string>
+
+    <!-- Label for overflow menu option that deletes all items data in the app -->
+    <string name="action_delete_all_entries">Delete All items</string>
+
+    <!-- Title for the activity to add a new item  -->
+    <string name="editor_activity_title_new_inventory_item">Add an item to the list</string>
+
+    <!-- Title for the activity to add a new inventory item -->
+    <string name="editor_activity_title_edit_inventory_item">Edit an item from the list</string>
+
+    <!-- Label for editor menu option to save inventory item and leave editor  -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor overflow menu option that deletes the current inventory item -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Label for product's name in the editor -->
+    <string name="category_product_name">Product\'s name</string>
+
+    <!-- Label for price per unit of the product in the editor  -->
+    <string name="category_price_per_unit">Price</string>
+
+    <!-- Label for Quantity information in the editor  -->
+    <string name="category_quantity">Quantity</string>
+
+    <!-- Label for features in the editor-->
+    <string name="category_Features">Features</string>
+
+    <!-- Text hint for name field in the editor -->
+    <string name="hint_products_name">Product\'s Name</string>
+
+    <!-- Text hint for price field in the editor  -->
+    <string name="hint_price" translatable="false">40</string>
+
+    <!-- Text hint for quantity field in the editor  -->
+    <string name="hint_quantity" translatable="false">450</string>
+
+    <!-- Text hint for time field in the editor  -->
+    <string name="hint_features">Main features of the product</string>
+
+    <!-- Currency for the price: euros -->
+    <string name="unit_price" translatable="false">€/U</string>
+
+    <!-- Units for quantity  -->
+    <string name="unit_quantity">Units</string>
+
+    <!-- Toast message in editor when new inventory item has been successfully inserted  -->
+    <string name="editor_insert_inventory_successful">Item saved</string>
+
+    <!-- Toast message in editor when new item has failed to be inserted  -->
+    <string name="editor_insert_inventory_failed">Error with saving item</string>
+
+    <!-- Title text for the empty view, which describes the image when there is no items  -->
+    <string name="empty_view_title_text">Let\'s put everythin in order</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a inventory item  -->
+    <string name="empty_view_subtitle_text">Add an item to the inventory</string>
+
+    <!-- Toast message in editor when current item was successfully updated  -->
+    <string name="editor_update_inventory_successful">Items updated</string>
+
+    <!-- Toast message in editor when current inventory item has failed to be updated -->
+    <string name="editor_update_inventory_failed">Error with updating item</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes  -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current inventory item  -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Toast message in editor when current inventory item was successfully deleted -->
+    <string name="editor_delete_inventory_successful">Item deleted</string>
+
+    <!-- Toast message in editor when current inventory has failed to be deleted -->
+    <string name="editor_delete_inventory_failed">Error with deleting item</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current item  -->
+    <string name="delete_dialog_msg">Delete this item?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current item  -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog message to ask the user to confirm deleting all items  -->
+    <string name="delete_all_dialog_msg">Delete all items?</string>
+
+
+    <!-- Dialog message to ask the user to cancel  -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Text to sell an item of the current item on the list -->
+    <string name="sell">Sell</string>
+
+    <!-- Text for the total price  -->
+    <string name="total_price">Total</string>
+
+    <!-- Currency for the price: euros -->
+    <string name="unit_price_total" translatable="false">€</string>
+
+    <!-- To edit the item -->
+    <string name="edit_item">edit</string>
+
+    <!-- To send the order -->
+    <string name="your_order">Your order</string>
+
+
+
+
+
+</resources>

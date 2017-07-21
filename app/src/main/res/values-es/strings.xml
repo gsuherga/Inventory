@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventario</string>
+    <string name="action_delete">Borrar</string>
+    <string name="action_delete_all_entries">Borrar todo los elementos</string>
+    <string name="action_insert_inventory_data">Insertar registro de ejemplo</string>
+    <string name="action_save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="category_Features">Características</string>
+    <string name="category_quantity">Cantidad</string>
+    <string name="category_price_per_unit">Precio</string>
+    <string name="category_product_name">Nombre usuario</string>
+    <string name="delete">Borrar</string>
+    <string name="delete_dialog_msg">¿Borrar este elemento?</string>
+    <string name="discard">Descartar</string>
+    <string name="editor_activity_title_edit_inventory_item">Editar un elemento de la lista</string>
+    <string name="editor_activity_title_new_inventory_item">Añadir un elemento a la lista</string>
+    <string name="editor_delete_inventory_failed">Error al borrar el elemento</string>
+    <string name="editor_delete_inventory_successful">Elemento borrado</string>
+    <string name="editor_insert_inventory_failed">Error al guardar el elemento</string>
+    <string name="editor_insert_inventory_successful">Elemento guardado</string>
+    <string name="editor_update_inventory_failed">Error al guardar el elemento</string>
+    <string name="editor_update_inventory_successful">Registro actualizado</string>
+    <string name="empty_view_subtitle_text">Añade un elemento al inventario</string>
+    <string name="empty_view_title_text">¡Pongamos todo en orden!</string>
+    <string name="hint_products_name">Nombre producto</string>
+    <string name="delete_all_dialog_msg">¿Borrar todos los elementos?</string>
+    <string name="keep_editing">Seguir editando</string>
+    <string name="unsaved_changes_dialog_msg">¿Deshacer cambios y salir?</string>
+    <string name="hint_features">Características principales</string>
+    <string name="unit_quantity">unidades</string>
+    <string name="action_insert_new_inventory_data">Insertar nuevo elemento</string>
+    <string name="edit_item">Editar</string>
+    <string name="your_order">Tu pedido</string>
+    <string name="total_price">Total</string>
+    <string name="sell">Vender</string>
+</resources>
