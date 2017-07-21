@@ -58,6 +58,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper{
     /**
      * This is called when the database needs to be upgraded.
      */
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // The database is still at version 1, so there's nothing to do be done here.

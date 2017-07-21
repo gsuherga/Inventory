@@ -137,7 +137,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return true;
     }
 
-    /* Get user input from editor and save the item into database.
+            /* Get user input from editor and save the item into database.
             */
     private void saveInventoryItem() {
 
@@ -145,8 +145,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Use trim to eliminate leading or trailing white space
         String productNameString = mProductNameEditText.getText().toString().trim();
         String featuresString = mFeaturesEditText.getText().toString().trim();
-        String quantityString = mPriceEditText.getText().toString().trim();
-        String priceString = mQuantityEditText.getText().toString().trim();
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        String priceString = mPriceEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
@@ -161,9 +161,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // and item attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.PRODUCT_NAME, productNameString);
-        values.put(InventoryEntry.COLUMN_PRICE_PER_UNIT, quantityString);
+        values.put(InventoryEntry.COLUMN_PRICE_PER_UNIT, priceString);
         values.put(InventoryEntry.COLUMN_FEATURES, featuresString);
-        values.put(InventoryEntry.COLUMN_QUANTITY,priceString);
+        values.put(InventoryEntry.COLUMN_QUANTITY, quantityString);
 
         // Determine if this is a new or existing item by checking if mCurrentInventoryItemUri is null or not
 
@@ -178,8 +178,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             // Insert a new item into the provider, returning the content URI for the new item.
             Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
-
-            //To check if all fields are empty. If so, we go back to the catalog activity
 
             // Show a toast message depending on whether or not the insertion was successful
             if (newUri == null) {
@@ -277,7 +275,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
-                mCurrentInventoryItemUri,         // Query the content URI for the current item
+                mCurrentInventoryItemUri,// Query the content URI for the current item
                 projection,             // Columns to include in the resulting Cursor
                 null,                   // No selection clause
                 null,                   // No selection arguments
