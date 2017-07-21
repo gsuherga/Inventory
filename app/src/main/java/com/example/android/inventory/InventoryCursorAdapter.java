@@ -30,10 +30,9 @@ import static android.R.attr.id;
  */
 public class InventoryCursorAdapter extends CursorAdapter {
 
-    EditorActivity currentItemUri;
-
-    EditorActivity currentItem;
-
+    /*
+    The context in the adapter.
+     */
     View mView;
 
    /*
@@ -41,6 +40,12 @@ public class InventoryCursorAdapter extends CursorAdapter {
     */
 
     Integer quantityToSell = 0;
+
+    /*
+    Units of item
+     */
+
+    Integer quantity;
 
     /**
      * Constructs a new {@link InventoryCursorAdapter}.
@@ -82,6 +87,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, final Cursor cursor) {
 
         mView = view;
+
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.user_product_name_to_show);
         TextView pricePerUnitTextView = (TextView) view.findViewById(R.id.price_per_unit_to_show);
@@ -100,7 +106,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         final String productsName = cursor.getString(nameColumnIndex);
         final Double price = cursor.getDouble(pricePerUnitColumnIndex);
         String features = cursor.getString(featuresColumnIndex);
-        final int quantity = cursor.getInt(quantityColumnIndex);
+        quantity = cursor.getInt(quantityColumnIndex);
         final String unit = view.getContext().getString(R.string.unit_quantity);
 
         // Update the TextViews with the attributes for the current item
@@ -129,15 +135,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
                     totalPriceTextView.setText(String.format(Locale.ENGLISH, " " + "%.2f", totalprice) + " " + " €");
 
-                    ContentValues values = new ContentValues();
 
-                    values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity + 1));
-
-                    Uri currentItemInventory = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
-
-                    mView.getContext().getContentResolver().update(currentItemInventory,values, null, null);
-
-                    quantityTextView.setText((Integer.toString(cursor.getInt(quantityColumnIndex))) + " " + unit);
                 }
 
             }
@@ -152,18 +150,6 @@ public class InventoryCursorAdapter extends CursorAdapter {
                     Double totalprice = quantityToSell * price;
                     totalPriceTextView.setText(String.format(Locale.ENGLISH, " " + "%.2f", totalprice) + " " + " €");
 
-                    ContentValues values = new ContentValues();
-
-                    cursor.moveToFirst();
-
-                    values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity - quantityToSell));
-
-                    Uri currentItemInventory = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
-
-                    mView.getContext().getContentResolver().update(currentItemInventory,values, null, null);
-
-                    quantityTextView.setText((Integer.toString(cursor.getInt(quantityColumnIndex))) + " " + unit);
-
                 }
             }
         });
@@ -174,6 +160,14 @@ public class InventoryCursorAdapter extends CursorAdapter {
             public void onClick(View v) {
 
                 if (quantityToSell > 0) {
+
+                    //Updating the cell for the quantity
+
+                    quantity = quantity - quantityToSell;
+                    ContentValues values = new ContentValues();
+                    values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
+                    Uri currentItemInventory = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
+                    mView.getContext().getContentResolver().update(currentItemInventory,values, null, null);
 
                     //Send the information about the order by email
                     Intent sendOrder = new Intent(Intent.ACTION_SENDTO);

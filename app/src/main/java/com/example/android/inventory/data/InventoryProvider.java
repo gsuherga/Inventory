@@ -156,7 +156,7 @@ public class InventoryProvider extends ContentProvider {
             throw new IllegalArgumentException("Please introduce the price per unit of the product");
         }
 
-        // If the productQuantity is provided, check that it's greater than 0 km
+        // If the productQuantity is provided, check that it's greater than 0.
         Integer productQuantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
 
         if (productQuantity != null && productQuantity < 0) {
@@ -234,9 +234,9 @@ public class InventoryProvider extends ContentProvider {
 
         // If the {@link InventoryEntry#COLUMN_} key is present,
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_QUANTITY)) {
-            // Check price.
-            Integer productPrice = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
-            if (productPrice != null && productPrice < 0) {
+            // Check quantity
+            Integer quantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
+            if (quantity != null && quantity < 0) {
                 throw new IllegalArgumentException("Please introduce how many items of the product you have");
             }
         }
@@ -254,13 +254,11 @@ public class InventoryProvider extends ContentProvider {
         if (values.size() == 0) {
             return 0;
         }
-
         // Otherwise, get writeable database to update the data
         SQLiteDatabase database = mDInventoryDbHelper.getWritableDatabase();
 
         // Returns the number of database rows affected by the update statement
-        // return database.update(InventoryContract.InventoryEntry.TABLE_NAME, values, selection, selectionArgs);
-
+        //return database.update(InventoryContract.InventoryEntry.TABLE_NAME, values, selection, selectionArgs);
 
         // Perform the update on the database and get the number of rows affected
         int rowsUpdated = database.update(InventoryContract.InventoryEntry.TABLE_NAME, values, selection, selectionArgs);
