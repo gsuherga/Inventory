@@ -143,6 +143,12 @@ public class InventoryProvider extends ContentProvider {
      */
     private Uri insertInventoryData(Uri uri, ContentValues values) {
 
+        //Check the image is not null
+        byte [] productImage = values.getAsByteArray(InventoryContract.InventoryEntry.PRODUCT_IMAGE);
+        if (productImage == null) {
+            throw new IllegalArgumentException("Requires an image for the product");
+        }
+
         // Check that the productName is not null
         String productName = values.getAsString(InventoryContract.InventoryEntry.PRODUCT_NAME);
         if (productName == null) {
@@ -152,15 +158,15 @@ public class InventoryProvider extends ContentProvider {
         // If the pricePerUnit is provided. It could be zero as it could be something for free as a gift for clients.
         Double pricePerUnit = values.getAsDouble(InventoryContract.InventoryEntry.COLUMN_PRICE_PER_UNIT);
 
-        if (pricePerUnit != null  && pricePerUnit < 0) {
+        if (pricePerUnit == null  && pricePerUnit < 0) {
             throw new IllegalArgumentException("Please introduce the price per unit of the product");
         }
 
         // If the productQuantity is provided, check that it's greater than 0.
         Integer productQuantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
 
-        if (productQuantity != null && productQuantity < 0) {
-            throw new IllegalArgumentException("Please introduce how much productFeatures you burnt");
+        if (productQuantity == null && productQuantity < 0) {
+            throw new IllegalArgumentException("Please introduce how much product you have");
         }
 
         // If the productFeatures is provided, get it as a String
@@ -216,6 +222,14 @@ public class InventoryProvider extends ContentProvider {
 
         // If the {@link InventoryEntry#PRODUCT_NAME} key is present,
         // check that the name value is not null.
+        if (values.containsKey(InventoryContract.InventoryEntry.PRODUCT_IMAGE)) {
+            byte [] image = values.getAsByteArray(InventoryContract.InventoryEntry.PRODUCT_IMAGE);
+            if (image == null) {
+                throw new IllegalArgumentException("Requires an image for the product");
+            }
+        }
+        // If the {@link InventoryEntry#PRODUCT_NAME} key is present,
+        // check that the name value is not null.
         if (values.containsKey(InventoryContract.InventoryEntry.PRODUCT_NAME)) {
             String name = values.getAsString(InventoryContract.InventoryEntry.PRODUCT_NAME);
             if (name == null) {
@@ -227,7 +241,7 @@ public class InventoryProvider extends ContentProvider {
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_PRICE_PER_UNIT)) {
             // Check price.
             Integer productPrice = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_PRICE_PER_UNIT);
-            if (productPrice != null && productPrice < 0) {
+            if (productPrice == null && productPrice < 0) {
                 throw new IllegalArgumentException("Please introduce how much the product costs");
             }
         }
@@ -236,7 +250,7 @@ public class InventoryProvider extends ContentProvider {
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_QUANTITY)) {
             // Check quantity
             Integer quantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
-            if (quantity != null && quantity < 0) {
+            if (quantity == null && quantity < 0) {
                 throw new IllegalArgumentException("Please introduce how many items of the product you have");
             }
         }
@@ -247,8 +261,6 @@ public class InventoryProvider extends ContentProvider {
             // Check that features has a valid value
             String productFeatures = values.getAsString(InventoryContract.InventoryEntry.COLUMN_FEATURES);
         }
-
-        // No need to check the breed, any value is valid (including null).
 
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {
@@ -295,9 +307,6 @@ public class InventoryProvider extends ContentProvider {
                 // Delete a single row given by the ID in the URI
                 selection = InventoryContract.InventoryEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                // return database.delete(InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs);
-
-               // return database.delete(InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs);
             rowsDeleted = database.delete(InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs);
             break;
             default:

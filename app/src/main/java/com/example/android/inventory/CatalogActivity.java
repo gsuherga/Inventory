@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -21,6 +23,8 @@ import android.widget.ListView;
 
 import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Displays list of items that were entered and stored in the app.
@@ -57,7 +61,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 //To create an intent to open the editor activity with the information of the current item of the inventory
 
                 Intent intent = new Intent (CatalogActivity.this, EditorActivity.class);
-                Uri currentItemInventory = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI,id);
+                Uri currentItemInventory = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
 
                 //Sent the Uri in the intent
 
@@ -81,13 +85,22 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     private void insertDataInventory() {
         // Create a ContentValues object where column names are the keys,
         ContentValues values = new ContentValues();
+
+        //Get the image of the headphones to put it into the database
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.headphones);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] headphoneImage = stream.toByteArray();
+
+        values.put(InventoryEntry.PRODUCT_IMAGE, headphoneImage);
         values.put(InventoryEntry.PRODUCT_NAME, "headphones");
         values.put(InventoryEntry.COLUMN_PRICE_PER_UNIT, "50");
         values.put(InventoryEntry.COLUMN_QUANTITY, "120");
         values.put(InventoryEntry.COLUMN_FEATURES, "This is a fake data to check the app");
 
         // Insert a new row for this item into the provider using the ContentResolver.
-        // Use the {@link PetEntry#CONTENT_URI} to indicate that we want to insert
+        // Use the {@link InventoryEntry#CONTENT_URI} to indicate that we want to insert
         // into the items database table.
         Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
 
@@ -127,6 +140,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         //Define a projection that specifies the columns from the table we are care about
         String[] projection = {
                 InventoryEntry._ID,
+                InventoryEntry.PRODUCT_NAME,
                 InventoryEntry.PRODUCT_NAME,
                 InventoryEntry.COLUMN_PRICE_PER_UNIT,
                 InventoryEntry.COLUMN_QUANTITY,

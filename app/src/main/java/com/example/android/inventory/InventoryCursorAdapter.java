@@ -9,19 +9,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.inventory.data.InventoryContract;
 
 import java.util.Locale;
-
-import static android.R.attr.id;
 
 /**
  * {@link InventoryCursorAdapter} is an adapter for a list or grid view
@@ -89,20 +89,23 @@ public class InventoryCursorAdapter extends CursorAdapter {
         mView = view;
 
         // Find individual views that we want to modify in the list item layout
+        ImageView productImageView = (ImageView) view.findViewById(R.id.product_image_to_show);
         TextView nameTextView = (TextView) view.findViewById(R.id.user_product_name_to_show);
         TextView pricePerUnitTextView = (TextView) view.findViewById(R.id.price_per_unit_to_show);
         final TextView quantityTextView = (TextView) view.findViewById(R.id.quantity_to_show);
         TextView featureTextView = (TextView) view.findViewById(R.id.features_to_show);
 
+
         // Find the columns of item attributes that we're interested in
         final int IndexColum = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
+        int imageColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.PRODUCT_IMAGE);
         int nameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.PRODUCT_NAME);
         int pricePerUnitColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_PRICE_PER_UNIT);
         final int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
         int featuresColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_FEATURES);
 
-
         // Read the item attributes from the Cursor for the current item
+        byte [] productsImage = cursor.getBlob(imageColumnIndex);
         final String productsName = cursor.getString(nameColumnIndex);
         final Double price = cursor.getDouble(pricePerUnitColumnIndex);
         String features = cursor.getString(featuresColumnIndex);
@@ -110,8 +113,9 @@ public class InventoryCursorAdapter extends CursorAdapter {
         final String unit = view.getContext().getString(R.string.unit_quantity);
 
         // Update the TextViews with the attributes for the current item
+        productImageView.setImageBitmap(BitmapFactory.decodeByteArray(productsImage,0,productsImage.length));
         nameTextView.setText(productsName);
-        pricePerUnitTextView.setText(String.format(Locale.ENGLISH, " " + "%.2f", price) + " " + " €/U");
+        pricePerUnitTextView.setText(String.format(Locale.ENGLISH, " " + "%.2f", price) + " " + " €");
         quantityTextView.setText((Integer.toString(quantity)) + " " + unit);
         featureTextView.setText(features);
 
@@ -166,6 +170,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
                     quantity = quantity - quantityToSell;
                     ContentValues values = new ContentValues();
                     values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
+                    final int id =cursor.getInt(IndexColum);
                     Uri currentItemInventory = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
                     mView.getContext().getContentResolver().update(currentItemInventory,values, null, null);
 

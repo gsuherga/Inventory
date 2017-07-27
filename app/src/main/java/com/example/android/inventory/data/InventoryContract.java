@@ -67,6 +67,16 @@ public class InventoryContract {
          */
         public final static String _ID = BaseColumns._ID;
 
+
+        /**
+         * Image of the product
+         *
+         * Type: BLOB
+         */
+        public final static String PRODUCT_IMAGE ="Image";
+
+
+
         /**
          * Name of the product
          *

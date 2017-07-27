@@ -51,7 +51,7 @@
     <string name="hint_features">Main features of the product</string>
 
     <!-- Currency for the price: euros -->
-    <string name="unit_price" translatable="false">€/U</string>
+    <string name="unit_price" translatable="false">€</string>
 
     <!-- Units for quantity  -->
     <string name="unit_quantity">Units</string>
@@ -116,6 +116,9 @@
 
     <!-- To send the order -->
     <string name="your_order">Your order</string>
+
+    <!-- Image of the product -->
+    <string name="product_image">Image</string>
 
 
 

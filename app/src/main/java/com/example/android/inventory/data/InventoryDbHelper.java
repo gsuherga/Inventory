@@ -44,10 +44,11 @@ public class InventoryDbHelper extends SQLiteOpenHelper{
         // Create a String that contains the SQL statement to create the inventory tracker table
         String SQL_CREATE_INVENTORY_TABLE = "CREATE TABLE " + InventoryEntry.TABLE_NAME + " ("+
                 InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                InventoryEntry.PRODUCT_IMAGE + " BLOB NOT NULL," +
                 InventoryEntry.PRODUCT_NAME + " TEXT NOT NULL," +
-                InventoryEntry.COLUMN_PRICE_PER_UNIT + " DOUBLE DEFAULT 0, " +
-                InventoryEntry.COLUMN_QUANTITY + " INTEGER DEFAULT 0, " +
-                InventoryEntry.COLUMN_FEATURES + " TEXT);";
+                InventoryEntry.COLUMN_PRICE_PER_UNIT + " DOUBLE DEFAULT 0 NOT NULL, " +
+                InventoryEntry.COLUMN_QUANTITY + " INTEGER DEFAULT 0 NOT NULL, " +
+                InventoryEntry.COLUMN_FEATURES + " TEXT NOT NULL);";
 
         Log.v(LOG_TAG, SQL_CREATE_INVENTORY_TABLE);
 

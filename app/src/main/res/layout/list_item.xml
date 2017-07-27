@@ -7,6 +7,14 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_margin">
 
+    <ImageView
+        android:id="@+id/product_image_to_show"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/headphones"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/user_product_name_to_show"
         tools:text="@string/hint_products_name"
@@ -97,12 +105,19 @@
 
             </LinearLayout>
 
-    <TextView
-        android:text="@string/total_price"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+    <TextView
+        android:text="@string/total_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fontFamily="sans-serif"
-        android:gravity="start"
+        android:gravity="end"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/black"
         android:paddingBottom="8dp"
@@ -111,12 +126,17 @@
     <TextView
         android:id="@+id/total_price"
         tools:text="45 €"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fontFamily="sans-serif"
         android:gravity="start"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/darker_gray" />
+
+    </LinearLayout>
 
 
     <Button

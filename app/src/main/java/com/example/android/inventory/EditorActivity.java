@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 import java.util.Locale;
 
 /**
- * Allows user to create a new item or edditing one.
+ * Allows user to create a new item or editing one.
  */
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -60,6 +61,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * EditText field to enter a small description of the product
      */
     private EditText mFeaturesEditText;
+
+    /**
+     * Button to enter an image of the product
+     */
+    private Button mProductImageButton;
 
 
     /**
@@ -99,6 +105,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         // Find all relevant views that we will need to read user input from
+        mProductImageButton = (Button) findViewById(R.id.product_image);
         mProductNameEditText = (EditText) findViewById(R.id.edit_product_name);
         mPriceEditText = (EditText) findViewById(R.id.edit_price);
         mQuantityEditText = (EditText) findViewById(R.id.edit_quantity);
@@ -107,6 +114,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
+        mProductImageButton.setOnTouchListener(mTouchListener);
         mProductNameEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
         mFeaturesEditText.setOnTouchListener(mTouchListener);
@@ -143,6 +151,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
+
         String productNameString = mProductNameEditText.getText().toString().trim();
         String featuresString = mFeaturesEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
